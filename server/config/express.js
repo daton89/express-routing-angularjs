@@ -1,7 +1,6 @@
 'use strict'
 
 const config = require('../config/environment')
-const path = require('path')
 const nunjucks = require('nunjucks')
 
 const logger = require('morgan')
@@ -18,7 +17,7 @@ module.exports = function (app) {
   app.locals.ENV = process.env.NODE_ENV
   app.locals.ENV_DEVELOPMENT = process.env.NODE_ENV === 'development'
 
-  nunjucks.configure(path.resolve(config.root, 'client', 'dist'), {
+  nunjucks.configure(config.client, {
     express: app,
     autoescape: true,
     noCache: true
