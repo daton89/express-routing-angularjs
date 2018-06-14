@@ -34,15 +34,49 @@ a {
   background-color: #1f1f1f;
 }
 .header-title {
+  color: white;
   flex: 1;
   font-size: 1.5rem;
   margin: 1rem;
+
 }
-.header-date {
-  flex: 1;
-  text-align: right;
-  margin: 1rem;
-  white: white;
+.header-article-link {
+  font-size: 1.2rem;
+}
+
+.waggle {
+  animation: waggle 1s 3s forwards ease-out;
+}
+
+@keyframes waggle {
+  0% {
+    transform: none;
+  }
+  50% {
+    transform: rotateZ(-20deg) scale(1.2);
+  }
+  60% {
+    transform: rotateZ(25deg) scale(1.2);
+  }
+  67.5% {
+    transform: rotateZ(-15deg) scale(1.2);
+  }
+  75% {
+    transform: rotateZ(15deg) scale(1.2);
+  }
+  82.5% {
+    transform: rotateZ(-12deg) scale(1.2);
+  }
+  85% {
+    transform: rotateZ(0) scale(1.2);
+  }
+  100% {
+    transform: rotateZ(0) scale(1);
+  }
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 .title {
