@@ -16,19 +16,11 @@ var all = {
   // Root path of server
   root: path.resolve(__dirname, '../../..'),
 
-  client: {
-    src: path.resolve(__dirname, '../../../', 'client', 'src'),
-    dist: path.resolve(__dirname, '../../../', 'client', 'dist')
-  },
-
   // Server port
   port: process.env.PORT || 9000,
 
   // Server IP
-  ip: process.env.IP || '0.0.0.0',
-
-  // Should we populate the DB with sample data?
-  seedDB: false
+  ip: process.env.IP || '0.0.0.0'
 }
 
 // Export the config object based on the NODE_ENV
