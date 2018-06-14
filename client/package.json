@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "gulp serve",
     "test": "gulp test",
     "build": "gulp",
     "serve": "gulp serve",
