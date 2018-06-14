@@ -30,8 +30,8 @@ const proxy = httpProxy.createProxyServer({
 
 proxy.on('error', (error, req, res) => {
   res.writeHead(500, {
-      'Content-Type': 'text/plain'
-    });
+    'Content-Type': 'text/plain'
+  });
 
   console.error(chalk.red('[Proxy]'), error);
 });
@@ -41,7 +41,7 @@ proxy.on('error', (error, req, res) => {
  * handle backend request and proxy them to your backend.
  */
 function proxyMiddleware(req, res, next) {
-    /*
+  /*
      * This test is the switch of each request to determine if the request is
      * for a static file to be handled by BrowserSync or a backend request to proxy.
      *
@@ -49,19 +49,20 @@ function proxyMiddleware(req, res, next) {
      * for your needs. If you can, you could also check on a context in the url which
      * may be more reliable but can't be generic.
      */
-    // console.log('req.url => ', req.url);
-    // console.log('regexp => ', /\.(html|css|js|png|jpg|jpeg|gif|ico|xml|rss|txt|eot|svg|ttf|woff|woff2|cur|json)(\?((r|v|rel|rev)=[\-\.\w]*)?)?$/.test(req.url));
-  if (/\.(html|css|js|png|jpg|jpeg|gif|ico|map|xml|rss|txt|eot|svg|ttf|woff|woff2|cur|json)(\?((r|v|rel|rev)=[\-\.\w]*)?)?$/.test(req.url) || // fix for static files
-        req.url === '/' || // fix for root render
-        /^\/[a-z]{2}(?:\/|$)/gmi.test(req.url)) { // fix for html5 pushState
-      if ((/\/api\/files\/.{10,}/igm.test(req.url))) {
-          proxy.web(req, res);
-        } else {
-          next();
-        }
-    } else {
-      proxy.web(req, res);
-    }
+
+  if (
+    /\.(html|css|js|png|jpg|jpeg|gif|ico|map|xml|rss|txt|eot|svg|ttf|woff|woff2|cur|json)(\?((r|v|rel|rev)=[-.\w]*)?)?$/.test(
+      req.url
+    )
+  ) {
+    return next();
+  }
+  // fix for html5 pushState
+  if (/^\/[a-z]{2}(?:\/|$)/gim.test(req.url)) {
+    return proxy.web();
+  }
+
+  proxy.web(req, res);
 }
 
 /*
@@ -71,4 +72,3 @@ function proxyMiddleware(req, res, next) {
  */
 
 module.exports = proxyMiddleware;
-// module.exports = [];
